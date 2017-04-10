@@ -167,7 +167,10 @@ carb.ouptput$DIC <- carb.ouptput$DIC*1000000 #convert to µmol kg-1
 carb.ouptput <- carb.ouptput[,-c(1,4,5,8,10:13,19)]
 carb.ouptput <- cbind(SW.chem$Date,  SW.chem$Tank,  SW.chem$Treatment, carb.ouptput) #combine the sample information with the seacarb output
 colnames(carb.ouptput) <- c("Date",  "Tank",  "Treatment",	"Salinity",	"Temperature", "pH",	"CO2",	"pCO2","HCO3",	"CO3",	"DIC", "TA",	"Aragonite.Sat") #Rename columns to describe contents
-carb.ouptput 
+carb.ouptput
+setwd(file.path(mainDir, 'Output')) #set output location
+write.table(carb.ouptput, file="SW_Chem_Table_byTank.csv",sep=",", row.names = FALSE)#exports your data as a CSV file
+setwd(file.path(mainDir, 'Data'))
 
 pdf("~/MyProjects/Moorea/Moorea_April2017/RAnalysis/Output/Treatment_SW_Chem.pdf")
 par(mfrow=c(3,2))
